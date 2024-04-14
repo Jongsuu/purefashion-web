@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: Inter var, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  margin: 0;
+}
+
+input:focus-visible {
+  outline: none;
+}
+
+button.loading.accent-button {
+  @apply brightness-125 pointer-events-none;
+}
+
+.toast-class {
+  z-index: 2;
+}

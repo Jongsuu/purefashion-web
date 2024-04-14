@@ -1,0 +1,51 @@
+<section id="navbar" class="fixed top-4 left-0 right-0">
+  <nav class="md:px-8 md:py-2 grid grid-cols-8 items-center bg-zinc-100 md:mx-8 md:rounded-md md:shadow-md">
+    <div class="select-none col-span-1 grid place-content-center h-[40px]">
+      <a [routerLink]="'/'" class="hover:scale-[104%] transition-transform relative h-[80px] w-[80px]">
+        <img src="assets/logo.jpg" height="64" width="64" class="absolute rounded-[50%] h-[80px] w-auto inset-0"/>
+      </a>
+    </div>
+    <ul class="col-span-6 list-none flex md:flex justify-center gap-x-12 items-center">
+      @for (link of links; track link.name) {
+      <li><a [routerLink]="link.href" class="nav-link">{{ link.name }}</a></li>
+      }
+    </ul>
+    <div class="flex items-center justify-end col-span-1 gap-x-8">
+      <button class="px-3 py-2 text-sm font-semibold text-gray-700 transition-colors duration-300 hover:text-gray-900">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+          <path d="M2.25 2.25a.75.75 0 0 0 0 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 0 0-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 0 0 0-1.5H5.378A2.25 2.25 0 0 1 7.5 15h11.218a.75.75 0 0 0 .674-.421 60.358 60.358 0 0 0 2.96-7.228.75.75 0 0 0-.525-.965A60.864 60.864 0 0 0 5.68 4.509l-.232-.867A1.875 1.875 0 0 0 3.636 2.25H2.25ZM3.75 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0ZM16.5 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Z" />
+        </svg>
+      </button>
+      <div class="relative">
+        <button (click)="toggleUserMenu()" [class.active-button]="showUserMenu"
+          class="flex justify-center items-center gap-x-2 px-3 py-2 text-sm font-semibold text-gray-700 transition-colors duration-300 hover:text-gray-900">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+            <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clip-rule="evenodd" />
+          </svg>
+          @if (auth.user$.value) {
+            <span>{{ auth.user$.value.username }}</span>
+          }
+        </button>
+        <ul [class.pointer-events-none]="!showUserMenu" [@fadeInMenu]="showUserMenu ? 'open' : 'close'"
+          class="absolute bg-slate-100 shadow-md -bottom-[150px] -right-[45%] w-[150px] rounded flex flex-col pt-2">
+          <li class="hover:bg-slate-200 transition-colors duration-300">
+            <button
+              class="w-full rounded-md px-3 py-2 text-sm font-semibold text-gray-700 text-left transition-colors duration-300"
+              >Profile</button>
+          </li>
+          <li class="hover:bg-slate-200 transition-colors duration-300">
+            <button
+              class="w-full rounded-md px-3 py-2 text-sm font-semibold text-gray-700 text-left transition-colors duration-300"
+              >Configuration</button>
+          </li>
+          <li class="border-t-gray-300 border-t p-2">
+            <button (click)="logout()"
+              class="w-full rounded-md px-3 py-2 text-sm font-semibold text-white shadow-sm transition-[filter] duration-300 bg-accent
+              hover:saturate-[130%] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+              >Log out</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</section>

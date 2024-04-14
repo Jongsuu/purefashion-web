@@ -1,0 +1,6 @@
+<a class="toast-class cursor-pointer" [class]="toastService.toastState$ | async" (click)="dismiss()"
+  [@toastTrigger]="(toastService.showsToast$ | async) ? 'open' : 'close'">
+  <span>
+    {{ toastService.toastMessage$ | async }}
+  </span>
+</a>

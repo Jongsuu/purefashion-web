@@ -1,0 +1,11 @@
+.nav-link {
+  @apply text-primary font-semibold transition-[saturate] duration-300;
+}
+
+.nav-link:hover {
+  @apply hover:saturate-[130%];
+}
+
+.active-button {
+  @apply text-gray-900 !important;
+}
