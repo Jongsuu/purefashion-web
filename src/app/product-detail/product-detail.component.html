@@ -1,0 +1,200 @@
+<section class="pt-[100px] pb-[50px] px-2 s:px-4 lg:px-6 xl:px-10 2xl:px-12">
+  <div>
+    <div class="p-4 md:p-5 xl:p-12 bg-white dark:bg-neutral-700 rounded-md shadow-xl">
+      @if (isLoading) {
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-5">
+          <div class="md:col-span-1 col-span-2 lg:h-[400px] md:h-[300px] s:h-[250px] h-[200px]">
+            <ngx-skeleton-loader [theme]="{ 'height': '100%' }"/>
+          </div>
+          <div class="col-span-2 2xl:col-span-3 flex flex-col gap-y-4">
+            <div>
+              <div class="md:h-[36px] s:h-[32px] h-[16px] mb-[6px]">
+                <ngx-skeleton-loader [theme]="{ 'height': '100%' }"/>
+              </div>
+              <div class="md:h-[20px] s:h-[15px] h-[14px] w-[400px]">
+                <ngx-skeleton-loader [theme]="{ 'height': '100%' }"/>
+              </div>
+            </div>
+            <div class="w-[275px] h-[48px]">
+              <ngx-skeleton-loader [theme]="{ 'height': '100%' }"/>
+            </div>
+            <div>
+              <ngx-skeleton-loader count="3"/>
+            </div>
+          </div>
+          <div class="col-span-full lg:col-span-1 lg:p-4 lg:rounded-md lg:shadow-xl s:flex s:justify-center">
+            <div class="w-auto xs-md:w-2/3 md:w-1/2 lg:w-auto">
+              <div class="h-[32px] mb-2">
+                <ngx-skeleton-loader [theme]="{ 'height': '100%' }"/>
+              </div>
+              <div class="m-0">
+                <ngx-skeleton-loader count="2" />
+              </div>
+              <div class="h-[32px] mt-2 w-[150px]">
+                <ngx-skeleton-loader [theme]="{ 'height': '100%', 'width': '100%' }"/>
+              </div>
+              <div class="h-[24px] mt-4 w-[175px]">
+                <ngx-skeleton-loader [theme]="{ 'height': '100%', 'width': '100%' }"/>
+              </div>
+              <div class="h-[48px] mt-2 w-[200px]">
+                <ngx-skeleton-loader [theme]="{ 'height': '100%', 'width': '100%' }"/>
+              </div>
+              <div class="h-[32px] mt-4 mb-2">
+                <ngx-skeleton-loader [theme]="{ 'height': '100%' }"/>
+              </div>
+              <div class="h-[32px]">
+                <ngx-skeleton-loader [theme]="{ 'height': '100%' }"/>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="pt-[50px] md:px-4 2xl:px-8">
+          <div class="h-[32px] w-[300px] mb-5">
+            <ngx-skeleton-loader [theme]="{ 'height': '100%', 'width': '100%' }" />
+          </div>
+          <ul class="flex flex-col gap-y-8">
+            <li>
+              <div class="flex gap-x-2 md:gap-x-5 items-center mb-2">
+                <div class="size-16 md:size-20">
+                  <ngx-skeleton-loader [theme]="{ 'height': '100%', 'width': '100%' }" appearance="circle" />
+                </div>
+                <div>
+                  <div class="h-[28px] md:h-[32px] mb-3">
+                    <ngx-skeleton-loader [theme]="{ 'height': '100%' }" />
+                  </div>
+                  <div class="flex gap-x-1 md:gap-x-2 items-baseline flex-wrap">
+                    <div class="h-[28px] md:h-[32px] w-[300px]">
+                      <ngx-skeleton-loader [theme]="{ 'height': '100%' }" />
+                    </div>
+                    <div class="h-[28px] md:h-[32px] w-[250px]">
+                      <ngx-skeleton-loader [theme]="{ 'height': '100%' }" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="flex gap-x-5 items-center">
+              </div>
+              <div>
+                <ngx-skeleton-loader count="3"/>
+              </div>
+            </li>
+          </ul>
+        </div>
+      }
+      @else {
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-5" @slightFadeIn>
+          <div
+            class="bg-slate-100 dark:bg-neutral-300 rounded-md shadow-xl
+            md:col-span-1 col-span-2
+            lg:h-[400px] md:h-[300px] s:h-[250px] h-[200px] flex justify-center items-center">
+            <img
+            src="data:image/png;base64,{{ item.image }}"
+            class="w-auto px-2 md:px-4 py-3 object-contain mix-blend-multiply h-full" />
+          </div>
+          <div class="col-span-2 2xl:col-span-3 flex flex-col gap-y-4">
+            <div>
+              <h1 class="md:text-3xl s:text-2xl text-[16px] dark:text-zinc-50">{{ item.name }}</h1>
+              <h2 class="md:text-xl s:text-[15px] text-[14px]">
+                <div class="flex gap-x-1">
+                  <span class="dark:text-zinc-100">from</span>
+                  <span class="text-primary dark:text-dark-primary">{{ item.author.username }}</span>
+                </div>
+              </h2>
+            </div>
+            @if (item.reviewCount > 0) {
+              <div class="flex gap-x-4 flex-wrap">
+                <div class="flex gap-x-2 items-center">
+                  <span class="md:text-[18px] text-[16px] flex items-center dark:text-zinc-100">{{ item.reviewAverage | number: '1.1-1' }}</span>
+                  <div class="product-stars text-[20px] s:text-[24px] md:text-[32px] h-[20px] s:h-[24px] md:h-[32px]"
+                    style="--rating: {{ item.reviewAverage }};"></div>
+                </div>
+                <span class="md:text-[18px] text-[16px] flex items-center dark:text-zinc-100">{{ item.reviewCount | i18nPlural : ({ '=0': '0 ratings', '=1': '1 rating', 'other': '# ratings', })}}</span>
+              </div>
+              <div>
+                <p class="m-0 2xl:w-2/3 w-full md:text-[16px] s:text-[15px] text-[14px] dark:text-zinc-100"
+                [class.line-clamp-4]="!showFullDescription" #descriptionElem
+                >{{ item.description }}</p>
+                @if (!isDescriptionSmall) {
+                <button
+                  (click)="showFullDescription = !showFullDescription"
+                  class="bg-transparent outline-none text-primary dark:text-dark-primary">
+                  {{ showFullDescription ? 'Read less' : 'Read more' }}
+                </button>
+                }
+              </div>
+            }
+            @else {
+              <p class="m-0 dark:text-zinc-100">No reviews yet</p>
+            }
+          </div>
+          <div class="col-span-full lg:col-span-1 lg:p-4 lg:rounded-md lg:shadow-xl s:flex s:justify-center bg-slate-50 dark:bg-neutral-600">
+            <div class="w-auto xs-md:w-2/3 md:w-1/2 lg:w-auto">
+              <h3 class="m-0 text-2xl dark:text-zinc-50">{{ item.price | currency : "EUR" : 'symbol' : '0.2-2' }}</h3>
+              <p class="text-gray-700 text-[14px] xl:text-[16px] dark:text-zinc-100">The prices of products sold on PureFashion include VAT. Depending on your delivery address, VAT may vary at checkout.</p>
+              <h4 class="mt-4 text-xl text-green-700 dark:text-green-500 font-medium">In stock</h4>
+              <p class="my-2 dark:text-zinc-100">Quantity</p>
+              <div class="inline-flex gap-x-2 items-stretch h-12">
+                <button type="button" (click)="decrementQuantity(quantityInput)" [disabled]="quantity <= 1"
+                  class="w-12 text-sm bg-white text-gray-700 border border-gray-300 flex items-center justify-center
+                  hover:border-gray-400 disabled:text-gray-400 disabled:border-gray-200">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                    <path fill-rule="evenodd" d="M4.25 12a.75.75 0 0 1 .75-.75h14a.75.75 0 0 1 0 1.5H5a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd" />
+                  </svg>
+                </button>
+                <input
+                #quantityInput
+                type="number"
+                class="w-12 bg-white text-gray-900 text-center border border-gray-300 hover:border-gray-400"
+                (change)="onChangeQuantity(quantityInput)"
+                value="1"
+                min="1"
+                max="30"/>
+                <button type="button" (click)="incrementQuantity(quantityInput)" [disabled]="quantity >= 30"
+                  class="w-12 text-sm bg-white text-gray-700 border border-gray-300 flex items-center justify-center
+                  hover:border-gray-400 disabled:text-gray-400 disabled:border-gray-200">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                  </svg>
+                </button>
+              </div>
+              @if (item.inCart) {
+                <button type="button" [class.loading]="addingToCart" (click)="removeFromCart()"
+                  class="mt-4 accent-button rounded-md px-3 py-2 text-sm font-semibold text-white
+                  shadow-sm w-full transition-[filter] duration-300 bg-secondary dark:bg-dark-secondary
+                  hover:saturate-[130%] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                  >
+                  @if (addingToCart) {
+                  <span>Removing from cart...</span>
+                  }
+                  @else {
+                  <span>Remove from cart</span>
+                  }
+                </button>
+              }
+              @else {
+                <button type="button" [class.loading]="addingToCart" (click)="addToCart()"
+                  class="mt-4 accent-button rounded-md px-3 py-2 text-sm font-semibold text-white
+                  shadow-sm w-full transition-[filter] duration-300 bg-secondary dark:bg-dark-secondary
+                  hover:saturate-[130%] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                  >
+                  @if (addingToCart) {
+                  <span>Adding to cart...</span>
+                  }
+                  @else {
+                  <span>Add to cart</span>
+                  }
+                </button>
+              }
+              <button type="button"
+                class="mt-4 accent-button rounded-md px-3 py-2 text-sm font-semibold text-white
+                shadow-sm w-full transition-[filter] duration-300 bg-accent dark:bg-dark-accent
+                hover:saturate-[130%] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                >Buy now</button>
+            </div>
+          </div>
+        </div>
+        <app-product-detail-reviews [reviews]="item.reviews" />
+      }
+      </div>
+  </div>
+</section>

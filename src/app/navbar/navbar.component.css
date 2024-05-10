@@ -1,11 +1,33 @@
 .nav-link {
-  @apply text-primary font-semibold transition-[saturate] duration-300;
+  padding-bottom: 5px;
+  @apply font-semibold relative;
 }
 
-.nav-link:hover {
-  @apply hover:saturate-[130%];
+.nav-link::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 0;
+  height: 3px;
+  transition: width .4s, right .4s, left .4s;
+  @apply bg-accent;
+}
+
+.nav-link:hover::before {
+  width: 100%;
+  left: 0;
+  right: initial;
 }
 
 .active-button {
-  @apply text-gray-900 !important;
+  @apply !important;
+}
+
+.menu-item-container {
+  @apply transition-colors duration-300;
+}
+
+.menu-item {
+  @apply w-full rounded-md px-3 py-2 text-sm font-semibold text-left transition-colors duration-300 ease-in-out;
 }

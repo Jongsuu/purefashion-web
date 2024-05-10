@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { RouterLink } from '@angular/router';
 import { fadeInMenu } from '../animations';
@@ -16,20 +16,28 @@ import { fadeInMenu } from '../animations';
 export class NavbarComponent {
   links = [
     {
-      name: "Man",
-      href: "/man"
+      name: "Men's clothing",
+      href: "/men"
     },
     {
-      name: "Woman",
-      href: "/woman"
+      name: "Women's clothing",
+      href: "/women"
     },
     {
-      name: "Child",
-      href: "/child"
+      name: "Jewelry",
+      href: "/jewelry"
+    },
+    {
+      name: "Electronics",
+      href: "/electronics"
     }
   ];
 
   showUserMenu = false;
+
+  @Output() isDarkMode = new EventEmitter<boolean>();
+
+  @Input() currentThemeIsDark = false;
 
   constructor(public auth: AuthService) { }
 
@@ -39,5 +47,9 @@ export class NavbarComponent {
 
   public logout(): void {
     this.auth.logout();
+  }
+
+  public toggleTheme(): void {
+    this.isDarkMode.emit(!this.currentThemeIsDark);
   }
 }

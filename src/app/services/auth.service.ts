@@ -11,7 +11,7 @@ export class AuthService {
   private env = "http://localhost:5277";
 
   // undefined -> Not logged in
-  // null -> Logged out
+  // null -> Logged out || guest
   // has value -> Logged in
   public user$ = new BehaviorSubject<dtoUser | null | undefined>(undefined);
 
@@ -33,10 +33,16 @@ export class AuthService {
   public logout(): void {
     this.user$.next(null);
     sessionStorage.removeItem("session");
+    document.location.reload();
   }
 
   public setUser(user: dtoUser): void {
     this.user$.next(user);
     sessionStorage.setItem("session", JSON.stringify(user));
+  }
+
+  public continueAsGuest(): void {
+    this.user$.next(null);
+    sessionStorage.removeItem("session");
   }
 }

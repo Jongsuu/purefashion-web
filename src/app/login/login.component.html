@@ -75,7 +75,14 @@
     </form>
     <div class="mt-4 flex gap-x-1 flex-wrap justify-center">
       <span>Don't have an account?</span>
-      <a class="text-primary font-bold hover:brightness-[120%] transition-[filter] duration-300 ease-in-out" [routerLink]="'/register'">Create an account</a>
+      <a [routerLink]="'/register'"
+        class="text-primary font-bold hover:brightness-[120%] transition-[filter] duration-300 ease-in-out"
+        >Create an account</a>
+    </div>
+    <div class="mt-1 flex gap-x-1 flex-wrap justify-center">
+      <button (click)="continueAsGuest()"
+        class="text-primary font-bold hover:brightness-[120%] transition-[filter] duration-300 ease-in-out"
+        >Continue as guest</button>
     </div>
   </div>
 </section>

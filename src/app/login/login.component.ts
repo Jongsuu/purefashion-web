@@ -123,12 +123,17 @@ export class LoginComponent {
       this.passwordStatus = 1;
   }
 
-  private handleRegisterError(error: HttpErrorResponse) {
+  continueAsGuest(): void {
+    this.auth.continueAsGuest();
+    this.router.navigateByUrl("/");
+  }
+
+  private handleLoginError(error: HttpErrorResponse) {
     try {
       const response = error.error as dtoActionResponse<string>;
       this.submitting = false;
 
-      if (response.message)
+      if (response && response.message)
         this.toast.errorToast(response.message);
 
       return throwError(() => new Error(response.message));
@@ -139,11 +144,13 @@ export class LoginComponent {
   }
 
   private loginUser(userLogin: dtoUserLogin): void {
-    this.auth.login(userLogin).pipe(catchError(this.handleRegisterError.bind(this))).subscribe(response => {
+    this.auth.login(userLogin).pipe(catchError(this.handleLoginError.bind(this))).subscribe(response => {
       this.submitting = false;
       this.toast.successToast(`Welcome back ${response.data!.username}!`);
       this.auth.setUser(response.data);
-      this.router.navigateByUrl("/");
+
+      let navigateTo = this.router.lastSuccessfulNavigation?.previousNavigation?.extractedUrl.toString();
+      this.router.navigateByUrl(navigateTo ?? "/");
     });
   }
 }

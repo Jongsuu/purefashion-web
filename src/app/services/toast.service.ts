@@ -8,12 +8,13 @@ export const TOAST_STATE = {
   info: "toast-info"
 };
 
-export const TOAST_DURATION = 2000;
+export const TOAST_DURATION = 4000;
 
 @Injectable({
   providedIn: 'root'
 })
 export class ToastService {
+
   constructor() { }
 
   showsToast$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -22,20 +23,34 @@ export class ToastService {
 
   private timer: any;
 
-  private showToast(toastState: string, toastMsg: string): void {
-    this.showsToast$.next(true);
-    this.toastState$.next(toastState);
-    this.toastMessage$.next(toastMsg);
-    if (this.timer)
-      clearTimeout(this.timer);
-    this.timer = setTimeout(() => {
+  private showToast(toastState: string, toastMsg: string, duration = TOAST_DURATION): void {
+    if (this.timer) {
       this.dismissToast();
-    }, TOAST_DURATION);
+      setTimeout(() => {
+        this.showsToast$.next(true);
+        this.toastState$.next(toastState);
+        this.toastMessage$.next(toastMsg);
+
+        this.timer = setTimeout(() => {
+          this.dismissToast();
+        }, duration);
+      }, 500);
+    }
+    else {
+      this.showsToast$.next(true);
+      this.toastState$.next(toastState);
+      this.toastMessage$.next(toastMsg);
+
+      this.timer = setTimeout(() => {
+        this.dismissToast();
+      }, duration);
+    }
   }
 
   dismissToast(): void {
     this.showsToast$.next(false);
     clearTimeout(this.timer);
+    this.timer = null;
   }
 
   warningToast(toastMsg: string): void {

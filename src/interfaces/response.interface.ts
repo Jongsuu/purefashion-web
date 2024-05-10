@@ -1,3 +1,8 @@
+export interface dtoListResponse<T> extends dtoResponseError {
+  data: T[];
+  resultsCount: number;
+}
+
 export interface dtoActionResponse<T> extends dtoResponseError {
   data: T;
 }

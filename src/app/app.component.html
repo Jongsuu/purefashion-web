@@ -1,6 +1,6 @@
-<main class="min-h-[100vh] bg-primary-container">
-  @if (userLogged) {
-    <app-navbar/>
+<main class="min-h-[100vh] bg-primary-container dark:bg-neutral-800" [class.dark]="isDarkMode">
+  @if (!router.isActive("/login", true) && !router.isActive("/register", true)) {
+    <app-navbar [currentThemeIsDark]="isDarkMode" (isDarkMode)="changeTheme($event)"/>
   }
   <router-outlet />
 </main>

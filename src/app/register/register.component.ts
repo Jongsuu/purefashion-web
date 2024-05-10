@@ -218,12 +218,17 @@ export class RegisterComponent {
       this.confirmPasswordStatus = 2;
   }
 
+  continueAsGuest(): void {
+    this.auth.continueAsGuest();
+    this.router.navigateByUrl("/");
+  }
+
   private handleRegisterError(error: HttpErrorResponse) {
     try {
       const response = error.error as dtoActionResponse<string>;
       this.submitting = false;
 
-      if (response.message)
+      if (response && response.message)
         this.toast.errorToast(response.message);
 
       return throwError(() => new Error(response.message));
@@ -238,7 +243,9 @@ export class RegisterComponent {
       this.submitting = false;
       this.toast.successToast(`Congrats ${response.data!.username}! You are now part of PureFashion!`);
       this.auth.setUser(response.data);
-      this.router.navigateByUrl("/");
+
+      let navigateTo = this.router.lastSuccessfulNavigation?.previousNavigation?.extractedUrl.toString();
+      this.router.navigateByUrl(navigateTo ?? "/");
     });
   }
 }

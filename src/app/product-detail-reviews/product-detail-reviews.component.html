@@ -1,0 +1,34 @@
+<section id="product-reviews" class="pt-[50px] md:px-4 2xl:px-8" @slightFadeIn>
+  <h3 class="text-2xl mb-5 dark:text-zinc-50">Reviews</h3>
+  <div>
+    <ul class="flex flex-col gap-y-8">
+      @for (review of reviews; track review) {
+        <li>
+          <div class="flex gap-x-2 md:gap-x-5 items-center">
+            <img
+            class="rounded-[50%] h-16 md:h-20 w-auto hidden md:block"
+            src="data:image/png;base64,{{ getAuthorIcon(review.author.id) }}" />
+            <div>
+              <h5 class="font-semibold text-[14px] md:text-[16px] dark:text-zinc-50">{{ review.title }}</h5>
+              <div class="flex gap-x-1 md:gap-x-2 items-baseline flex-wrap">
+                <h4 class="md:text-[18px] text-[16px] dark:text-zinc-100">{{ review.author.username }}</h4>
+                <div class="review-stars text-[20px] s:text-[24px] md:text-[28px] h-[20px] s:h-[24px] md:h-[28px]"
+                  style="--rating: {{ review.rating }};"></div>
+              </div>
+            </div>
+          </div>
+          <p class="mt-1 text-[14px] md:text-[16px] dark:text-zinc-100">{{ review.description }}</p>
+        </li>
+      }
+    </ul>
+    <!--
+      <app-pagination
+      [currentPage]="currentPage"
+      [totalPages]="totalPages"
+      (goTo)="onGoToPage($event)"
+      (next)="onNext($event)"
+      (previous)="onPrevious($event)"
+      />
+    -->
+  </div>
+</section>
