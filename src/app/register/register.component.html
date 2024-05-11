@@ -1,18 +1,18 @@
 <section class="grid place-content-center w-full h-[100vh]">
   <div @fadeIn>
     <form [formGroup]="form" (ngSubmit)="onSubmit()"
-      class="px-3 xs:px-8 sm:px-10 sm:min-w-80 xs:min-w-72 min-w-min py-8 border-gray-900 shadow-xl rounded-lg bg-white">
-      <h1 class="s:text-3xl text-2xl text-center">Join PureFashion today</h1>
+      class="px-3 xs:px-8 sm:px-10 sm:min-w-80 xs:min-w-72 min-w-min py-8 shadow-xl rounded-lg bg-white dark:bg-neutral-700">
+      <h1 class="s:text-3xl text-2xl text-center dark:text-zinc-100">Join PureFashion today</h1>
       <div class="max-w-2xl">
         <div class="space-y-12">
           <div class="mt-4 grid grid-cols-1 gap-y-2">
             <div class="col-span-full">
-              <label class="block text-sm font-medium leading-6 text-gray-900" for="name">Name</label>
+              <label class="block text-sm font-medium leading-6 text-gray-900 dark:text-zinc-100" for="name">Name</label>
               <div class="mt-1">
                 <input type="text" placeholder="Your first name" formControlName="name" id="name" #nameInput
-                class="block w-full rounded-md border-0 text-gray-900 shadow-sm
-                ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary
-                placeholder:text-gray-400 sm:text-sm sm:leading-6 py-1.5 px-3" (keyup)="checkName(nameInput)" />
+                class="block w-full rounded-md border-0 text-gray-900 dark:text-zinc-100 shadow-sm dark:bg-neutral-600
+                ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary dark:focus:ring-dark-primary
+                placeholder:text-gray-400 dark:placeholder:text-zinc-300 sm:text-sm sm:leading-6 py-1.5 px-3" (keyup)="checkName(nameInput)" />
               </div>
               <p class="text-sm mt-[2px] h-[16px] font-bold">
               @if (nameStatus !== -1) {
@@ -23,32 +23,33 @@
               </p>
             </div>
             <div class="col-span-full">
-              <label class="block text-sm font-medium leading-6 text-gray-900" for="email">Email</label>
+              <label class="block text-sm font-medium leading-6 text-gray-900 dark:text-zinc-100" for="email">Email</label>
               <div class="mt-1">
                 <input type="email" placeholder="Your best email" formControlName="email" id="email" #emailInput
-                class="block w-full rounded-md border-0 text-gray-900 shadow-sm
-                ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary
-                placeholder:text-gray-400 sm:text-sm sm:leading-6 py-1.5 px-3" (keyup)="checkEmail(emailInput)" />
+                class="block w-full rounded-md border-0 text-gray-900 dark:text-zinc-100 shadow-sm dark:bg-neutral-600
+                ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary dark:focus:ring-dark-primary
+                placeholder:text-gray-400 dark:placeholder:text-zinc-300 sm:text-sm sm:leading-6 py-1.5 px-3" (keyup)="checkEmail(emailInput)" />
               </div>
               <p class="text-sm mt-[2px] h-[16px] font-bold">
               @if (emailStatus !== -1) {
                 @if (emailStatus === 0) {
-                <span class="text-red-500">An email is required</span>
+                <span class="text-red-500 dark:text-red-400">An email is required</span>
                 }
                 @else if (emailStatus === 1) {
-                <span class="text-red-500">The email is invalid</span>
+                <span class="text-red-500 dark:text-red-400">The email is invalid</span>
                 }
               }
               </p>
             </div>
             <div class="col-span-full">
-              <label class="block text-sm font-medium leading-6 text-gray-900" for="password">Password</label>
+              <label class="block text-sm font-medium leading-6 text-gray-900 dark:text-zinc-100" for="password">Password</label>
               <div class="mt-1 relative">
-                <input type="password" formControlName="password" id="password" class="block w-full rounded-md border-0 text-gray-900 shadow-sm
-                ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary
+                <input type="password" formControlName="password" id="password" class="block w-full rounded-md border-0 text-gray-900 dark:text-zinc-100 shadow-sm dark:bg-neutral-600
+                ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary dark:focus:ring-dark-primary
                 placeholder:text-gray-400 sm:text-sm sm:leading-6 py-1.5 px-3" #passwordInput (keyup)="checkPassword(passwordInput, confirmPasswordInput)"/>
-                <button type="button" class="text-gray-600 bg-transparent shadow-sm absolute right-2 -translate-y-[50%] top-[50%] hover:text-gray-800 transition-colors duration-300 ease-in-out"
-                  (click)="changePasswordVisibility(passwordInput, true)" tabindex="-1">
+                <button type="button" (click)="changePasswordVisibility(passwordInput, true)" tabindex="-1"
+                  class="text-gray-600 dark:text-zinc-200 bg-transparent shadow-sm absolute right-2 -translate-y-[50%] top-[50%]
+                  hover:text-gray-800 dark:hover:text-zinc-400 transition-colors duration-300 ease-in-out">
                   @if (showPassword) {
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
                     <path d="M3.53 2.47a.75.75 0 0 0-1.06 1.06l18 18a.75.75 0 1 0 1.06-1.06l-18-18ZM22.676 12.553a11.249 11.249 0 0 1-2.631 4.31l-3.099-3.099a5.25 5.25 0 0 0-6.71-6.71L7.759 4.577a11.217 11.217 0 0 1 4.242-.827c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113Z" />
@@ -74,34 +75,34 @@
                     <span></span>
                     }
                     @else if (passwordStatus === 0) {
-                    <span class="text-red-700">Very weak</span>
+                    <span class="text-red-700 dark:text-red-600">Very weak</span>
                     }
                     @else if (passwordStatus === 1) {
-                    <span class="text-red-500">Weak</span>
+                    <span class="text-red-500 dark:text-red-400">Weak</span>
                     }
                     @else if (passwordStatus === 2) {
-                    <span class="text-orange-500">Medium</span>
+                    <span class="text-orange-500 dark:text-orange-400">Medium</span>
                     }
                     @else if (passwordStatus === 3) {
-                    <span class="text-green-500">Strong</span>
+                    <span class="text-green-500 dark:text-green-400">Strong</span>
                     }
                     @else {
-                    <span class="text-green-700">Very strong</span>
+                    <span class="text-green-700 dark:text-green-600">Very strong</span>
                     }
                   </span>
                 </div>
               </div>
             </div>
             <div class="mt-4 col-span-full">
-              <label class="block text-sm/none font-medium leading-6 text-gray-900" for="confirm-password">Confirm password</label>
+              <label class="block text-sm/none font-medium leading-6 text-gray-900 dark:text-zinc-100" for="confirm-password">Confirm password</label>
               <div class="mt-1 relative">
                 <input type="password" formControlName="confirmPassword" id="confirm-password" #confirmPasswordInput (keyup)="checkConfirmPassword(passwordInput, confirmPasswordInput)"
-                class="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300
-                focus:ring-2 focus:ring-inset focus:ring-primary disabled:bg-gray-200
-                placeholder:text-gray-400 sm:text-sm sm:leading-6 py-1.5 px-3"/>
+                class="block w-full rounded-md border-0 text-gray-900 dark:text-zinc-100 shadow-sm dark:bg-neutral-600
+                ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-primary dark:focus:ring-dark-primary
+                placeholder:text-gray-400 sm:text-sm sm:leading-6 py-1.5 px-3" />
                 <button type="button" (click)="changePasswordVisibility(confirmPasswordInput, false)" tabindex="-1" [disabled]="passwordStatus < 3"
-                  class="text-gray-600 bg-transparent shadow-sm absolute right-2 -translate-y-[50%] top-[50%]
-                  hover:text-gray-800 transition-colors duration-300 disabled:text-gray-400">
+                  class="text-gray-600 dark:text-zinc-200 bg-transparent shadow-sm absolute right-2 -translate-y-[50%] top-[50%]
+                  hover:text-gray-800 dark:hover:text-zinc-400 transition-colors duration-300 ease-in-out disabled:text-gray-400 dark:disabled:text-zinc-500">
                   @if (showConfirmPassword) {
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
                     <path d="M3.53 2.47a.75.75 0 0 0-1.06 1.06l18 18a.75.75 0 1 0 1.06-1.06l-18-18ZM22.676 12.553a11.249 11.249 0 0 1-2.631 4.31l-3.099-3.099a5.25 5.25 0 0 0-6.71-6.71L7.759 4.577a11.217 11.217 0 0 1 4.242-.827c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113Z" />
@@ -120,10 +121,10 @@
               <p class="text-sm mt-[2px] h-[16px] font-bold">
               @if (passwordStatus >= 3 && confirmPasswordStatus !== 0) {
                 @if (confirmPasswordStatus === 1) {
-                <span class="text-red-500">Passwords don't match</span>
+                <span class="text-red-500 dark:text-red-400">Passwords don't match</span>
                 }
                 @else {
-                <span class="text-green-500">Passwords match!</span>
+                <span class="text-green-500 dark:text-green-400">Passwords match!</span>
                 }
               }
               </p>
@@ -132,7 +133,7 @@
         </div>
         <div class="flex items-center justify-center gap-x-6">
           <button type="submit" [class.loading]="submitting"
-            class="mt-4 accent-button rounded-md px-3 py-2 text-sm font-semibold text-white shadow-sm w-full transition-[filter] duration-300 bg-accent
+            class="mt-4 accent-button rounded-md px-3 py-2 text-sm font-semibold text-white shadow-sm w-full transition-[filter] duration-300 bg-accent dark:bg-dark-accent
             hover:saturate-[130%] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
             >
             @if (submitting) {
@@ -146,12 +147,12 @@
       </div>
     </form>
     <div class="mt-4 flex gap-x-1 flex-wrap justify-center">
-      <span>Already have an account?</span>
-      <a class="text-primary font-bold hover:brightness-[120%] transition-[filter] duration-300 ease-in-out" [routerLink]="'/login'">Login now</a>
+      <span class="dark:text-zinc-100">Already have an account?</span>
+      <a class="text-primary dark:text-dark-primary font-bold hover:brightness-[120%] transition-[filter] duration-300 ease-in-out" [routerLink]="'/login'">Login now</a>
     </div>
     <div class="mt-1 flex gap-x-1 flex-wrap justify-center">
       <button (click)="continueAsGuest()"
-        class="text-primary font-bold hover:brightness-[120%] transition-[filter] duration-300 ease-in-out"
+        class="text-primary dark:text-dark-primary font-bold hover:brightness-[120%] transition-[filter] duration-300 ease-in-out"
         >Continue as guest</button>
     </div>
   </div>

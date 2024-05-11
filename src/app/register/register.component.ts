@@ -245,6 +245,10 @@ export class RegisterComponent {
       this.auth.setUser(response.data);
 
       let navigateTo = this.router.lastSuccessfulNavigation?.previousNavigation?.extractedUrl.toString();
+
+      if (navigateTo === "/login")
+        navigateTo = "/";
+
       this.router.navigateByUrl(navigateTo ?? "/");
     });
   }

@@ -28,17 +28,26 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.auth.user$.subscribe(item => {
-      if (!item) {
+      if (!item)
         // this.router.navigateByUrl("/login");
         this.userLogged = false;
-      }
-      else {
+      else
         this.userLogged = true;
-      }
     });
+
+    let sessionTheme = sessionStorage.getItem("theme");
+    if (sessionTheme)
+      this.isDarkMode = sessionTheme === "dark";
+    else {
+      const darkModeMediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      this.isDarkMode = darkModeMediaQuery.matches;
+    }
+
+    sessionStorage.setItem("theme", this.isDarkMode ? "dark" : "light");
   }
 
   changeTheme(isDark: boolean): void {
     this.isDarkMode = isDark;
+    sessionStorage.setItem("theme", this.isDarkMode ? "dark" : "light");
   }
 }

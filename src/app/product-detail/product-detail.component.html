@@ -127,11 +127,11 @@
               <p class="m-0 dark:text-zinc-100">No reviews yet</p>
             }
           </div>
-          <div class="col-span-full lg:col-span-1 lg:p-4 lg:rounded-md lg:shadow-xl s:flex s:justify-center bg-slate-50 dark:bg-neutral-600">
+          <div class="col-span-full lg:col-span-1 lg:p-4 lg:rounded-md lg:shadow-xl s:flex s:justify-center bg-slate-100 dark:bg-neutral-600">
             <div class="w-auto xs-md:w-2/3 md:w-1/2 lg:w-auto">
               <h3 class="m-0 text-2xl dark:text-zinc-50">{{ item.price | currency : "EUR" : 'symbol' : '0.2-2' }}</h3>
               <p class="text-gray-700 text-[14px] xl:text-[16px] dark:text-zinc-100">The prices of products sold on PureFashion include VAT. Depending on your delivery address, VAT may vary at checkout.</p>
-              <h4 class="mt-4 text-xl text-green-700 dark:text-green-500 font-medium">In stock</h4>
+              <h4 class="mt-4 text-xl text-green-700 dark:text-green-400 font-medium">In stock</h4>
               <p class="my-2 dark:text-zinc-100">Quantity</p>
               <div class="inline-flex gap-x-2 items-stretch h-12">
                 <button type="button" (click)="decrementQuantity(quantityInput)" [disabled]="quantity <= 1"

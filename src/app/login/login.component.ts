@@ -150,6 +150,10 @@ export class LoginComponent {
       this.auth.setUser(response.data);
 
       let navigateTo = this.router.lastSuccessfulNavigation?.previousNavigation?.extractedUrl.toString();
+
+      if (navigateTo === "/register")
+        navigateTo = "/";
+
       this.router.navigateByUrl(navigateTo ?? "/");
     });
   }

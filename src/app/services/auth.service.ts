@@ -38,7 +38,7 @@ export class AuthService {
 
   public setUser(user: dtoUser): void {
     this.user$.next(user);
-    sessionStorage.setItem("session", JSON.stringify(user));
+    sessionStorage.setItem("session", JSON.stringify({ token: user.token, username: user.username }));
   }
 
   public continueAsGuest(): void {
