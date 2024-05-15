@@ -157,7 +157,7 @@ export class ProductDetailComponent implements OnInit {
       this.item.inCart = response.data;
 
       if (response.data) {
-        this.toast.successToast(`Added <b>${this.item.name}</b> to cart!`);
+        this.toast.successToast(`<b>${this.item.name.length >= 35 ? this.item.name.substring(0, 32) + "..." : this.item.name}</b> was added to Shopping Cart!`);
       }
     });
   }
@@ -174,7 +174,7 @@ export class ProductDetailComponent implements OnInit {
       this.item.inCart = !response.data;
 
       if (response.data) {
-        this.toast.successToast(`Removed <b>${this.item.name}</b> from cart`);
+        this.toast.successToast(`<b>${this.item.name.length >= 35 ? this.item.name.substring(0, 32) + "..." : this.item.name}</b> was removed from Shopping Cart`);
       }
     });
   }

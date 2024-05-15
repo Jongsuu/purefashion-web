@@ -1,3 +1,16 @@
+export interface dtoProductData {
+  productId: number;
+  name: string;
+  price: number;
+  category: string;
+  image: string;
+}
+
+export interface dtoProductListItem extends dtoProductData {
+  reviewAverage: number;
+  reviewCount: number;
+}
+
 export interface dtoProductEntity extends dtoProductListItem {
   description: string;
   author: dtoAuthor;
@@ -5,38 +18,16 @@ export interface dtoProductEntity extends dtoProductListItem {
   inCart: boolean;
 }
 
-export interface dtoProductListItem {
-  productId: number;
-  name: string;
-  price: number;
-  categoryId: number;
-  image: string;
-  reviewAverage: number;
-  reviewCount: number;
+export interface dtoProductCartData extends dtoProductData {
+  addedDate: Date;
 }
 
 export interface dtoProduct {
   name: string;
   description: string;
   price: number;
-  categoryId: number;
+  category: string;
   imageUrl: string;
-}
-
-export interface dtoProductListFilter {
-  minPrice?: number;
-  maxPrice?: number;
-  pageIndex: number;
-  pageSize: number;
-  sortOrder?: string;
-  sortField?: string;
-}
-
-export enum ProductCategory {
-  men = "men",
-  women = "women",
-  jewelry = "jewelry",
-  electronics = "electronics"
 }
 
 export interface dtoAuthor {

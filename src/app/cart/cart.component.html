@@ -1,0 +1,115 @@
+<section class="pt-[100px] pb-[50px] px-2 s:px-4 lg:px-6 xl:px-10 2xl:px-12">
+  <div class="s-md:p-5 xl:p-12 s-md:bg-white dark:s-md:bg-neutral-700 s-md:rounded-md s-md:shadow-xl">
+    @if (isLoading) {
+      <div class="h-[48px] w-[300px]">
+        <ngx-skeleton-loader [theme]="{ 'height': '100%' }"/>
+      </div>
+      <ul class="flex flex-col gap-4 my-5">
+        @for(product of nProducts; track product) {
+          <li>
+            <div class="flex-grow transition-colors duration-200 ease-in-out rounded-xl shadow-xl
+                  grid xl:grid-cols-5 s-md:grid-cols-6 s-md:p-4
+                  bg-slate-50 dark:bg-neutral-600">
+              <div class="xl:col-span-1 s-md:col-span-2">
+                <div class="w-auto h-[150px] s-md:h-[175px] lg:h-[200px]">
+                  <ngx-skeleton-loader [theme]="{ 'height': '100%', 'width': '100%' }"/>
+                </div>
+              </div>
+              <div class="p-2 lg:col-span-4 s-md:col-span-4">
+                <div>
+                  <div class="h-[24px] md:w-1/2 s-md:w-2/3 w-full">
+                    <ngx-skeleton-loader [theme]="{ 'height': '100%' }"/>
+                  </div>
+                </div>
+                <div class="mt-[6px]">
+                  <div class="h-[24px] w-[150px]">
+                    <ngx-skeleton-loader [theme]="{ 'height': '100%' }"/>
+                  </div>
+                </div>
+                <div class="mt-[6px]">
+                  <div class="h-[24px] s-md:w-[250px] w-[200px]">
+                    <ngx-skeleton-loader [theme]="{ 'height': '100%' }"/>
+                  </div>
+                </div>
+                <div class="mt-[6px] flex gap-x-3">
+                  <div class="h-[24px] w-[48px]">
+                    <ngx-skeleton-loader [theme]="{ 'height': '100%' }"/>
+                  </div>
+                  <div class="h-[24px] w-[62px]">
+                    <ngx-skeleton-loader [theme]="{ 'height': '100%' }"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        }
+      </ul>
+      <div class="h-[48px] w-[300px]">
+        <ngx-skeleton-loader [theme]="{ 'height': '100%' }"/>
+      </div>
+    }
+    @else {
+      <div>
+        @if (resultsCount > 0) {
+          <h1 class="text-3xl dark:text-zinc-100" @slightFadeIn>Shopping cart</h1>
+          <ul class="flex flex-col gap-4 my-5">
+            @for(product of products; track product.productId) {
+              <li @slightFadeIn>
+                <div
+                  class="flex-grow transition-colors duration-200 ease-in-out rounded-xl shadow-xl
+                  grid xl:grid-cols-5 s-md:grid-cols-6 s-md:p-4
+                  bg-slate-50 dark:bg-neutral-600">
+                  <div class="flex justify-center items-center s-md:rounded-xl rounded-t-xl s-md:shadow-md
+                    xl:col-span-1 s-md:col-span-2
+                    bg-slate-100 dark:bg-neutral-300">
+                    <img
+                    src="data:image/png;base64,{{ product.image }}"
+                    class="w-auto px-2 s-md:px-4 py-3 object-contain mix-blend-multiply h-[150px] s-md:h-[175px] lg:h-[200px]"
+                    height="250px" width="250px" [loading]="$index > 3 ? 'lazy' : 'eager'"/>
+                  </div>
+                  <div class="p-2 lg:col-span-4 s-md:col-span-4">
+                    <div>
+                      <a
+                        [routerLink]="['/product', product.productId]"
+                        class="inline-block font-semibold transition-colors duration-300 ease-in-out dark:text-zinc-50 hover:text-primary dark:hover:text-dark-primary">
+                        <h5 title="{{ product.name }}" class="line-clamp-2">{{ product.name }}</h5>
+                      </a>
+                    </div>
+                    <p class="m-0 dark:text-zinc-100">{{ product.price | currency : "EUR" : 'symbol' : '0.2-2' }}</p>
+                    <div class="flex gap-x-1 dark:text-zinc-100">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                      </svg>
+                      <p class="m-0">{{ product.addedDate | date }}</p>
+                    </div>
+                    <div class="flex gap-x-3">
+                      <button
+                        (click)="removeFromCart(product)"
+                        class="bg-transparent outline-none transition-colors duration-500 ease-in-out
+                        text-primary dark:text-dark-primary font-semibold
+                        hover:text-accent dark:hover:text-dark-accent">Delete</button>
+                      <button
+                        class="bg-transparent outline-none transition-colors duration-300 ease-in-out
+                        text-secondary dark:text-dark-secondary font-semibold
+                        hover:text-accent dark:hover:text-dark-accent">Buy now</button>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            }
+          </ul>
+          <app-pagination
+            [currentPage]="currentPage"
+            [totalPages]="totalPages"
+            (goTo)="onGoToPage($event)"
+            (next)="onNext($event)"
+            (previous)="onPrevious($event)"
+            />
+        }
+        @else {
+          <h1 class="text-2xl dark:text-zinc-100" @slightFadeIn>Your PureFashion cart is empty.</h1>
+        }
+      </div>
+    }
+  </div>
+</section>

@@ -42,20 +42,29 @@
             @for (product of products; track product.productId) {
               <li class="col-span-1 flex s:flex-col s:justify-between rounded-md bg-slate-100 dark:bg-neutral-300 shadow-xl s:h-[375px] xs:h-[250px] h-[175px]">
                 <a
-                  routerLink="product/{{product.productId}}"
+                  [routerLink]="['/product', product.productId]"
                   class="flex justify-center items-center w-[40vw] s:w-auto">
                   <img
                   src="data:image/png;base64,{{ product.image }}"
                   class="w-auto px-2 md:px-4 py-3 object-contain mix-blend-multiply h-[175px] s:h-[250px] xs:h-[175px]"
-                  height="250px" width="250px" loading="{{ $index > 10 ? 'lazy' : 'eager' }}"/>
+                  height="250px" width="250px" [loading]="$index > 3 ? 'lazy' : 'eager'"/>
                 </a>
-                <div class="w-[60vw] s:rounded-b-md rounded-b-md p-2 bg-white dark:bg-neutral-700 s:flex-grow s:w-auto">
+                <div class="w-[60vw] s:rounded-b-md rounded-r-md p-2 bg-white dark:bg-neutral-700 s:flex-grow s:w-auto">
                   <a
-                    routerLink="product/{{product.productId}}"
-                    class="font-semibold product-title transition-colors duration-300 ease-in-out dark:text-zinc-50 hover:text-primary dark:hover:text-dark-primary">
+                    [routerLink]="['/product', product.productId]"
+                    class="font-semibold line-clamp-2 transition-colors duration-300 ease-in-out dark:text-zinc-50 hover:text-primary dark:hover:text-dark-primary">
                     <h5 title="{{ product.name }}">{{ product.name }}</h5>
                   </a>
-                  <p class="m-0 dark:text-zinc-100">{{ product.price | currency : "EUR" : 'symbol' : '0.2-2' }}</p>
+
+                  <div class="flex gap-x-1 flex-wrap">
+                    <p class="m-0 dark:text-zinc-100">{{ product.price | currency : "EUR" : 'symbol' : '0.2-2' }}</p>
+                    @if (!category) {
+                      <div class="relative grid items-center px-2 py-1 font-sans text-[13px] font-bold
+                        lowercase rounded-full select-none whitespace-nowrap" [class]="productCategoryColors[product.category]">
+                        <span>{{ product.category }}</span>
+                      </div>
+                    }
+                  </div>
                   <div class="product-stars text-[28px] h-[28px]"
                     style="--rating: {{product.reviewAverage }};">
                   </div>

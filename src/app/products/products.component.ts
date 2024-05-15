@@ -2,7 +2,7 @@ import { CurrencyPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ProductsService } from '../services/products.service';
-import { ProductCategory as ProductCategory, dtoProductEntity, dtoProductListItem } from '../../interfaces/product.interface';
+import { dtoProductEntity, dtoProductListItem } from '../../interfaces/product.interface';
 import { catchError, throwError } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { dtoActionResponse } from '../../interfaces/response.interface';
@@ -10,8 +10,16 @@ import { ToastService } from '../services/toast.service';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { slightFadeIn } from '../animations';
 import { PaginationComponent } from '../pagination/pagination.component';
+import { ProductCategory, dtoProductListFilter } from '../../interfaces/productFilter.interface';
 
 const PAGESIZE = 12;
+
+const PRODUCT_CATEGORY_COLORS = {
+  men: "bg-purple-500/20 text-purple-500",
+  women: "bg-rose-500/20 text-rose-500",
+  jewelry: "bg-blue-500/20 text-blue-500",
+  electronics: "bg-green-500/20 text-green-500",
+}
 
 @Component({
   selector: 'app-products',
@@ -29,6 +37,7 @@ const PAGESIZE = 12;
 export class ProductsComponent implements OnInit {
 
   category: ProductCategory | undefined;
+  productCategoryColors: { [key: string]: string } = PRODUCT_CATEGORY_COLORS;
 
   products: dtoProductListItem[] = [];
   resultsCount = 0;
@@ -74,33 +83,14 @@ export class ProductsComponent implements OnInit {
     this.getProducts();
   }
 
-  // private createProduct(product: dtoProduct): void {
-  //   this.productService.createProduct(product).pipe(catchError(this.handleCreateProductError.bind(this))).subscribe(response => {
-  //     this.toast.successToast(`Created product ${product.name}`);
-  //     console.log(response);
-  //   });
-  // }
-
-  // private handleCreateProductError(error: HttpErrorResponse) {
-  //   try {
-  //     const response = error.error as dtoActionResponse<boolean>;
-
-  //     if (response && response.message)
-  //       this.toast.errorToast(response.message);
-
-  //     return throwError(() => new Error(response.message));
-  //   }
-  //   catch (ex) {
-  //     return throwError(() => ex);
-  //   }
-  // }
-
   private getProducts(): void {
-    this.productService.getProducts({
+    const filter: dtoProductListFilter = {
       pageIndex: this.currentPage,
-      pageSize: PAGESIZE,
+      pageSize: PAGESIZE
+    };
 
-    }, this.category ? ProductCategory[this.category] : null).pipe(catchError(this.handleGetProductsError.bind(this)))
+    this.productService.getProducts(filter, this.category ? ProductCategory[this.category] : null)
+      .pipe(catchError(this.handleGetProductsError.bind(this)))
       .subscribe(response => {
         setTimeout(() => {
           this.products = response.data;

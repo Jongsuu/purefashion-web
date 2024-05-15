@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { dtoActionResponse, dtoListResponse } from '../../interfaces/response.interface';
-import { dtoProduct, dtoProductEntity, dtoProductListFilter, dtoProductListItem } from '../../interfaces/product.interface';
 import { AuthService } from './auth.service';
+import { dtoActionResponse, dtoListResponse } from '../../interfaces/response.interface';
+import { dtoProduct, dtoProductEntity, dtoProductListItem } from '../../interfaces/product.interface';
+import { dtoProductListFilter } from '../../interfaces/productFilter.interface';
 
 @Injectable({
   providedIn: 'root'

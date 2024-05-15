@@ -1,9 +1,9 @@
 <div class="flex mt-4">
-  <div class="inline-flex md:shadow-xl flex-wrap">
+  <div class="inline-flex shadow-xl flex-wrap">
     <button type="button"
       (click)="onPrevious()"
-      class="rounded-l-md transition-colors duration-200 ease-out p-3 flex gap-x-1 border-e-2
-      bg-white dark:bg-neutral-600 dark:border-neutral-400 dark:text-zinc-100
+      class="rounded-l-md transition-colors duration-200 ease-out p-3 flex gap-x-1
+      bg-white dark:bg-neutral-600 dark:text-zinc-100
       hover:bg-zinc-50 dark:hover:bg-neutral-500
       disabled:bg-slate-100 disabled:text-gray-700 dark:disabled:bg-neutral-700 dark:disabled:text-zinc-200"
       [disabled]="currentPage === 0">
@@ -18,14 +18,16 @@
         <span class="bg-white px-5 py-3 border-e-2 cursor-default select-none">...</span>
         }
         @else {
-        <button type="button"
-          (click)="onGoTo(page)"
-          class="px-5 py-3 border-e-2 transition-colors duration-200 ease-out
-          bg-white dark:bg-neutral-600 dark:border-neutral-400 dark:text-zinc-200
-          hover:bg-zinc-50 dark:hover:bg-neutral-500 dark:disabled:border-zinc-50
-          disabled:border disabled:border-black disabled:font-semibold disabled:bg-white dark:disabled:bg-zinc-600 dark:disabled:text-zinc-200"
+        <button type="button" (click)="onGoTo(page)"
+          class="border-s-2 dark:border-neutral-400 transition-colors duration-200 ease-out
+          dark:text-zinc-200 bg-white dark:bg-neutral-600
+          hover:bg-zinc-50 dark:hover:bg-neutral-500 disabled:bg-white dark:disabled:bg-zinc-600"
           [disabled]="currentPage === page - 1">
-          {{ page }}
+          <span
+            class="px-5 py-3 transition-colors duration-200 ease-out disabled:font-semibold"
+            [class]="currentPage === page - 1 ? 'border dark:border-zinc-50 border-black dark:text-zinc-200' : ''">
+            {{ page }}
+          </span>
         </button>
         }
       }
@@ -34,7 +36,7 @@
       (click)="onNext()"
       class="rounded-r-md p-3 flex gap-x-1 transition-colors duration-200 ease-out
       bg-white dark:bg-neutral-600 dark:text-zinc-100
-      hover:bg-zinc-50 dark:hover:bg-neutral-500
+      hover:bg-zinc-50 dark:hover:bg-neutral-500 border-s-2 border-text-zinc-200 dark:border-neutral-400
       disabled:bg-slate-100 disabled:text-gray-700 dark:disabled:bg-neutral-700 dark:disabled:text-zinc-200"
       [disabled]="currentPage === totalPages - 1">
       <span>Next</span>

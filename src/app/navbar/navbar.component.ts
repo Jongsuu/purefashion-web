@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AuthService } from '../services/auth.service';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { fadeInMenu } from '../animations';
 
 @Component({
@@ -39,17 +39,21 @@ export class NavbarComponent {
 
   @Input() currentThemeIsDark = false;
 
-  constructor(public auth: AuthService) { }
+  constructor(public auth: AuthService, private router: Router) { }
 
   public toggleUserMenu(): void {
     this.showUserMenu = !this.showUserMenu;
   }
 
-  public logout(): void {
-    this.auth.logout();
-  }
-
   public toggleTheme(): void {
     this.isDarkMode.emit(!this.currentThemeIsDark);
+  }
+
+  public navigateToLogin(): void {
+    this.router.navigateByUrl("/login");
+  }
+
+  public logout(): void {
+    this.auth.logout();
   }
 }

@@ -21,7 +21,7 @@ export default {
       screens: {
         "xs": "360px",
         "s": "420px",
-        "xs-md": "500px",
+        "s-md": "500px",
         ...defaultTheme.screens,
         "3xl": "1650px"
       }
