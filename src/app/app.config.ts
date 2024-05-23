@@ -6,6 +6,8 @@ import { routes } from './app.routes';
 import { ToastService } from './services/toast.service';
 import { provideHttpClient } from '@angular/common/http';
 import { AuthService } from './services/auth.service';
+import { ThemeService } from './services/theme.service';
+import { CartService } from './services/cart.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -13,6 +15,8 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideHttpClient(),
     ToastService,
-    AuthService
+    AuthService,
+    CartService,
+    ThemeService
   ]
 };

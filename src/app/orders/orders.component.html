@@ -1,0 +1,108 @@
+<section id="orders" class="pt-[100px] pb-[50px] px-2 s:px-4 lg:px-6 xl:px-10 2xl:px-12" #ordersSection>
+  <div class="s-md:p-5 xl:p-12 s-md:bg-white dark:s-md:bg-neutral-700 s-md:rounded-md s-md:shadow-xl">
+    @if (isLoading) {
+      <div class="h-[48px] md:w-[300px] s:w-2/3 w-full">
+        <ngx-skeleton-loader [theme]="{ 'height': '100%' }"
+          [animation]="(themeService.isDarkTheme$ | async) ? 'progress-dark' : 'progress'"/>
+      </div>
+      <ul class="flex flex-col gap-4 my-5">
+        @for(order of nOrders; track order) {
+          <li>
+            <div class="flex-grow transition-colors duration-200 ease-in-out rounded-xl shadow-xl
+                  grid xl:grid-cols-5 s-md:grid-cols-6 s-md:p-4
+                  bg-slate-50 dark:bg-neutral-600">
+              <div class="xl:col-span-1 s-md:col-span-2">
+                <div class="w-auto h-[150px] s-md:h-[175px] lg:h-[200px] s-md:rounded-xl rounded-t-xl overflow-hidden">
+                  <ngx-skeleton-loader [theme]="{ 'height': '100%', 'width': '100%', 'border-radius': '0px' }"
+                    [animation]="(themeService.isDarkTheme$ | async) ? 'progress-dark' : 'progress'"/>
+                </div>
+              </div>
+            </div>
+          </li>
+        }
+      </ul>
+      <div class="h-[48px] w-[300px]">
+        <ngx-skeleton-loader [theme]="{ 'height': '100%' }"
+          [animation]="(themeService.isDarkTheme$ | async) ? 'progress-dark' : 'progress'"/>
+      </div>
+    }
+    @else {
+      <div>
+        @if (resultsCount > 0) {
+          <h1 class="text-3xl dark:text-zinc-100" @slightFadeIn>Orders</h1>
+          <ul class="flex flex-col gap-4 my-5">
+            @for(order of orders; track order.orderId) {
+              <li @slightFadeIn class="shadow-xl rounded-md bg-slate-50 dark:bg-neutral-600 s-md:p-4 p-2">
+                <a [routerLink]="['/order', order.orderId]">
+                  <div>
+                    <ul>
+                      @for (product of order.order.products; track product.productId) {
+                        <li>
+                          <div>
+                            <a
+                            [routerLink]="['/product', product.productId]"
+                            class="text-primary dark:text-dark-primary font-bold dark:hover:brightness-[110%]
+                            hover:brightness-[120%] transition-[filter] duration-300 ease-in-out">
+                              {{ product.name }}</a>
+                            <div class="p-2">
+                              <span class="flex gap-x-1">
+                                <span class="dark:text-zinc-100">{{product.quantity }}</span>
+                                <span class="dark:text-zinc-100">x</span>
+                                <span class="dark:text-zinc-100">{{ product.price | currency : "EUR" : 'symbol' : '0.2-2' }}</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 dark:text-zinc-100">
+                                  <path fill-rule="evenodd" d="M16.72 7.72a.75.75 0 0 1 1.06 0l3.75 3.75a.75.75 0 0 1 0 1.06l-3.75 3.75a.75.75 0 1 1-1.06-1.06l2.47-2.47H3a.75.75 0 0 1 0-1.5h16.19l-2.47-2.47a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+                                </svg>
+                                <span class="dark:text-zinc-100 font-semibold">{{ (product.price * product.quantity) | currency : "EUR" : 'symbol' : '0.2-2' }}</span>
+                              </span>
+                            </div>
+                          </div>
+                        </li>
+                      }
+                    </ul>
+                  </div>
+                  <div class="flex gap-2 flex-wrap items-center mb-1">
+                    <div class="flex gap-x-2 flex-wrap items-center dark:text-zinc-100">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                        <path fill-rule="evenodd" d="M7.5 6v.75H5.513c-.96 0-1.764.724-1.865 1.679l-1.263 12A1.875 1.875 0 0 0 4.25 22.5h15.5a1.875 1.875 0 0 0 1.865-2.071l-1.263-12a1.875 1.875 0 0 0-1.865-1.679H16.5V6a4.5 4.5 0 1 0-9 0ZM12 3a3 3 0 0 0-3 3v.75h6V6a3 3 0 0 0-3-3Zm-3 8.25a3 3 0 1 0 6 0v-.75a.75.75 0 0 1 1.5 0v.75a4.5 4.5 0 1 1-9 0v-.75a.75.75 0 0 1 1.5 0v.75Z" clip-rule="evenodd" />
+                      </svg>
+                      <p>{{ order.orderDate | date : "fullDate" }}</p>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 dark:text-zinc-100">
+                      <path fill-rule="evenodd" d="M16.72 7.72a.75.75 0 0 1 1.06 0l3.75 3.75a.75.75 0 0 1 0 1.06l-3.75 3.75a.75.75 0 1 1-1.06-1.06l2.47-2.47H3a.75.75 0 0 1 0-1.5h16.19l-2.47-2.47a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+                    </svg>
+                    <div class="flex gap-x-2 flex-wrap items-center dark:text-zinc-100">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                        <path d="M3.375 4.5C2.339 4.5 1.5 5.34 1.5 6.375V13.5h12V6.375c0-1.036-.84-1.875-1.875-1.875h-8.25ZM13.5 15h-12v2.625c0 1.035.84 1.875 1.875 1.875h.375a3 3 0 1 1 6 0h3a.75.75 0 0 0 .75-.75V15Z" />
+                        <path d="M8.25 19.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0ZM15.75 6.75a.75.75 0 0 0-.75.75v11.25c0 .087.015.17.042.248a3 3 0 0 1 5.958.464c.853-.175 1.522-.935 1.464-1.883a18.659 18.659 0 0 0-3.732-10.104 1.837 1.837 0 0 0-1.47-.725H15.75Z" />
+                        <path d="M19.5 19.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0Z" />
+                      </svg>
+                      <p>{{ order.deliveryDate | date : "fullDate" }}</p>
+                    </div>
+                  </div>
+                  <div class="flex gap-x-1 items-center flex-wrap">
+                    <div class="px-2 py-1 rounded-md inline-flex gap-x-1 justify-center items-center" [class]="getOrderStatusColors(order.status)">
+                      <svg class="w-[6px] h-[6px]" viewBox="0 0 6 6" aria-hidden="true" fill="currentColor">
+                        <circle cx="3" cy="3" r="3"></circle>
+                      </svg>
+                      <span class="font-semibold">{{ getOrderStatus(order.status) }}</span>
+                    </div>
+                    <p class="dark:text-zinc-100">{{ order.total | currency : "EUR" : 'symbol' : '0.2-2' }}</p>
+                  </div>
+                </a>
+              </li>
+            }
+          </ul>
+          <app-pagination
+            [currentPage]="currentPage"
+            [totalPages]="totalPages"
+            (goTo)="onGoToPage($event)"
+            (next)="onNext($event)"
+            (previous)="onPrevious($event)"
+            />
+        }
+        @else {
+        }
+      </div>
+    }
+  </div>
+</section>

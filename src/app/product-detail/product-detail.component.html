@@ -4,70 +4,86 @@
       @if (isLoading) {
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-5">
           <div class="md:col-span-1 col-span-2 lg:h-[400px] md:h-[300px] s:h-[250px] h-[200px]">
-            <ngx-skeleton-loader [theme]="{ 'height': '100%' }"/>
+            <ngx-skeleton-loader [theme]="{ 'height': '100%' }"
+              [animation]="(themeService.isDarkTheme$ | async) ? 'progress-dark' : 'progress'"/>
           </div>
           <div class="col-span-2 2xl:col-span-3 flex flex-col gap-y-4">
             <div>
               <div class="md:h-[36px] s:h-[32px] h-[16px] mb-[6px]">
-                <ngx-skeleton-loader [theme]="{ 'height': '100%' }"/>
+                <ngx-skeleton-loader [theme]="{ 'height': '100%' }"
+                  [animation]="(themeService.isDarkTheme$ | async) ? 'progress-dark' : 'progress'"/>
               </div>
-              <div class="md:h-[20px] s:h-[15px] h-[14px] w-[400px]">
-                <ngx-skeleton-loader [theme]="{ 'height': '100%' }"/>
+              <div class="md:h-[20px] s:h-[15px] h-[14px] w-2/3 md:w-[400px]">
+                <ngx-skeleton-loader [theme]="{ 'height': '100%' }"
+                  [animation]="(themeService.isDarkTheme$ | async) ? 'progress-dark' : 'progress'"/>
               </div>
             </div>
             <div class="w-[275px] h-[48px]">
-              <ngx-skeleton-loader [theme]="{ 'height': '100%' }"/>
+              <ngx-skeleton-loader [theme]="{ 'height': '100%' }"
+                [animation]="(themeService.isDarkTheme$ | async) ? 'progress-dark' : 'progress'"/>
             </div>
             <div>
-              <ngx-skeleton-loader count="3"/>
+              <ngx-skeleton-loader count="3" [animation]="(themeService.isDarkTheme$ | async) ? 'progress-dark' : 'progress'"/>
             </div>
           </div>
-          <div class="col-span-full lg:col-span-1 lg:p-4 lg:rounded-md lg:shadow-xl s:flex s:justify-center">
-            <div class="w-auto s-md:w-2/3 md:w-1/2 lg:w-auto">
-              <div class="h-[32px] mb-2">
-                <ngx-skeleton-loader [theme]="{ 'height': '100%' }"/>
+          <div class="col-span-full lg:col-span-1 lg:p-4 lg:rounded-md lg:shadow-xl s:flex s:justify-center lg:bg-slate-100 dark:lg:bg-neutral-600">
+            <div class="w-full s-md:w-2/3 md:w-1/2 lg:w-full">
+              <div class="h-[32px] mb-2 w-full s:w-[150px]">
+                <ngx-skeleton-loader [theme]="{ 'height': '100%', 'width': '100%' }"
+                  [animation]="(themeService.isDarkTheme$ | async) ? 'progress-dark' : 'progress'"/>
               </div>
               <div class="m-0">
-                <ngx-skeleton-loader count="2" />
+                <ngx-skeleton-loader count="3" [theme]="{ 'margin': '0px' }"
+                  [animation]="(themeService.isDarkTheme$ | async) ? 'progress-dark' : 'progress'"/>
               </div>
               <div class="h-[32px] mt-2 w-[150px]">
-                <ngx-skeleton-loader [theme]="{ 'height': '100%', 'width': '100%' }"/>
+                <ngx-skeleton-loader [theme]="{ 'height': '100%', 'width': '100%' }"
+                  [animation]="(themeService.isDarkTheme$ | async) ? 'progress-dark' : 'progress'"/>
               </div>
               <div class="h-[24px] mt-4 w-[175px]">
-                <ngx-skeleton-loader [theme]="{ 'height': '100%', 'width': '100%' }"/>
+                <ngx-skeleton-loader [theme]="{ 'height': '100%', 'width': '100%' }"
+                  [animation]="(themeService.isDarkTheme$ | async) ? 'progress-dark' : 'progress'"/>
               </div>
-              <div class="h-[48px] mt-2 w-[200px]">
-                <ngx-skeleton-loader [theme]="{ 'height': '100%', 'width': '100%' }"/>
+              <div class="h-9 mt-2 w-[200px]">
+                <ngx-skeleton-loader [theme]="{ 'height': '100%', 'width': '100%' }"
+                  [animation]="(themeService.isDarkTheme$ | async) ? 'progress-dark' : 'progress'"/>
               </div>
               <div class="h-[32px] mt-4 mb-2">
-                <ngx-skeleton-loader [theme]="{ 'height': '100%' }"/>
+                <ngx-skeleton-loader [theme]="{ 'height': '100%' }"
+                  [animation]="(themeService.isDarkTheme$ | async) ? 'progress-dark' : 'progress'"/>
               </div>
               <div class="h-[32px]">
-                <ngx-skeleton-loader [theme]="{ 'height': '100%' }"/>
+                <ngx-skeleton-loader [theme]="{ 'height': '100%' }"
+                  [animation]="(themeService.isDarkTheme$ | async) ? 'progress-dark' : 'progress'"/>
               </div>
             </div>
           </div>
         </div>
         <div class="pt-[50px] md:px-4 2xl:px-8">
           <div class="h-[32px] w-[300px] mb-5">
-            <ngx-skeleton-loader [theme]="{ 'height': '100%', 'width': '100%' }" />
+            <ngx-skeleton-loader [theme]="{ 'height': '100%', 'width': '100%' }"
+              [animation]="(themeService.isDarkTheme$ | async) ? 'progress-dark' : 'progress'"/>
           </div>
           <ul class="flex flex-col gap-y-8">
             <li>
               <div class="flex gap-x-2 md:gap-x-5 items-center mb-2">
                 <div class="size-16 md:size-20">
-                  <ngx-skeleton-loader [theme]="{ 'height': '100%', 'width': '100%' }" appearance="circle" />
+                  <ngx-skeleton-loader [theme]="{ 'height': '100%', 'width': '100%' }" appearance="circle"
+                    [animation]="(themeService.isDarkTheme$ | async) ? 'progress-dark' : 'progress'"/>
                 </div>
                 <div>
                   <div class="h-[28px] md:h-[32px] mb-3">
-                    <ngx-skeleton-loader [theme]="{ 'height': '100%' }" />
+                    <ngx-skeleton-loader [theme]="{ 'height': '100%' }"
+                      [animation]="(themeService.isDarkTheme$ | async) ? 'progress-dark' : 'progress'"/>
                   </div>
                   <div class="flex gap-x-1 md:gap-x-2 items-baseline flex-wrap">
                     <div class="h-[28px] md:h-[32px] w-[300px]">
-                      <ngx-skeleton-loader [theme]="{ 'height': '100%' }" />
+                      <ngx-skeleton-loader [theme]="{ 'height': '100%' }"
+                        [animation]="(themeService.isDarkTheme$ | async) ? 'progress-dark' : 'progress'"/>
                     </div>
                     <div class="h-[28px] md:h-[32px] w-[250px]">
-                      <ngx-skeleton-loader [theme]="{ 'height': '100%' }" />
+                      <ngx-skeleton-loader [theme]="{ 'height': '100%' }"
+                        [animation]="(themeService.isDarkTheme$ | async) ? 'progress-dark' : 'progress'"/>
                     </div>
                   </div>
                 </div>
@@ -75,15 +91,16 @@
               <div class="flex gap-x-5 items-center">
               </div>
               <div>
-                <ngx-skeleton-loader count="3"/>
+                <ngx-skeleton-loader count="3"
+                  [animation]="(themeService.isDarkTheme$ | async) ? 'progress-dark' : 'progress'"/>
               </div>
             </li>
           </ul>
         </div>
       }
       @else {
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-5" @slightFadeIn>
-          <div
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-5">
+          <div @slightFadeIn
             class="bg-slate-100 dark:bg-neutral-300 rounded-md shadow-xl
             md:col-span-1 col-span-2
             lg:h-[400px] md:h-[300px] s:h-[250px] h-[200px] flex justify-center items-center">
@@ -91,7 +108,7 @@
             src="data:image/png;base64,{{ item.image }}"
             class="w-auto px-2 md:px-4 py-3 object-contain mix-blend-multiply h-full" />
           </div>
-          <div class="col-span-2 2xl:col-span-3 flex flex-col gap-y-4">
+          <div class="col-span-2 2xl:col-span-3 flex flex-col gap-y-4" @slightFadeIn>
             <div>
               <h1 class="md:text-3xl s:text-2xl text-[16px] dark:text-zinc-50">{{ item.name }}</h1>
               <h2 class="md:text-xl s:text-[15px] text-[14px]">
@@ -110,24 +127,25 @@
                 </div>
                 <span class="md:text-[18px] text-[16px] flex items-center dark:text-zinc-100">{{ item.reviewCount | i18nPlural : ({ '=0': '0 ratings', '=1': '1 rating', 'other': '# ratings', })}}</span>
               </div>
-              <div>
-                <p class="m-0 2xl:w-2/3 w-full md:text-[16px] s:text-[15px] text-[14px] dark:text-zinc-100"
-                [class.line-clamp-4]="!showFullDescription" #descriptionElem
-                >{{ item.description }}</p>
-                @if (!isDescriptionSmall) {
-                <button
-                  (click)="showFullDescription = !showFullDescription"
-                  class="bg-transparent outline-none text-primary dark:text-dark-primary">
-                  {{ showFullDescription ? 'Read less' : 'Read more' }}
-                </button>
-                }
-              </div>
             }
             @else {
               <p class="m-0 dark:text-zinc-100">No reviews yet</p>
             }
+            <div>
+              <p class="m-0 2xl:w-2/3 w-full md:text-[16px] s:text-[15px] text-[14px] dark:text-zinc-100"
+              [class.line-clamp-4]="!showFullDescription" #descriptionElem
+              >{{ item.description }}</p>
+              @if (!isDescriptionSmall) {
+              <button
+                (click)="showFullDescription = !showFullDescription"
+                class="bg-transparent outline-none text-primary dark:text-dark-primary">
+                {{ showFullDescription ? 'Read less' : 'Read more' }}
+              </button>
+              }
+            </div>
           </div>
-          <div class="col-span-full lg:col-span-1 lg:p-4 lg:rounded-md lg:shadow-xl s:flex s:justify-center lg:bg-slate-100 dark:lg:bg-neutral-600">
+          <div @slightFadeIn
+            class="col-span-full lg:col-span-1 lg:p-4 lg:rounded-md lg:shadow-xl s:flex s:justify-center lg:bg-slate-100 dark:lg:bg-neutral-600">
             <div class="w-auto s-md:w-2/3 md:w-1/2 lg:w-auto">
               <h3 class="m-0 text-2xl dark:text-zinc-50">{{ item.price | currency : "EUR" : 'symbol' : '0.2-2' }}</h3>
               <p class="text-gray-700 text-[14px] xl:text-[16px] dark:text-zinc-100">The prices of products sold on PureFashion include VAT. Depending on your delivery address, VAT may vary at checkout.</p>
@@ -158,36 +176,25 @@
                 </button>
               </div>
               <button type="button"
+                (click)="buyProductNow()"
                 class="mt-4 accent-button rounded-md px-3 py-2 text-sm font-semibold text-white
                 shadow-sm w-full transition-[filter] duration-300 bg-accent dark:bg-dark-accent
                 hover:saturate-[130%] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                 >Buy now</button>
               @if (item.inCart) {
-                <button type="button" [class.loading]="addingToCart" (click)="removeFromCart()"
+                <button type="button" (click)="removeFromCart()"
                   class="mt-4 accent-button rounded-md px-3 py-2 text-sm font-semibold text-white
                   shadow-sm w-full transition-[filter] duration-300 bg-secondary dark:bg-dark-secondary
-                  hover:saturate-[130%] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-                  >
-                  @if (addingToCart) {
-                  <span>Removing from cart...</span>
-                  }
-                  @else {
+                  hover:saturate-[130%] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
                   <span>Remove from cart</span>
-                  }
                 </button>
               }
               @else {
-                <button type="button" [class.loading]="addingToCart" (click)="addToCart()"
+                <button type="button" (click)="addToCart()"
                   class="mt-4 accent-button rounded-md px-3 py-2 text-sm font-semibold text-white
                   shadow-sm w-full transition-[filter] duration-300 bg-secondary dark:bg-dark-secondary
-                  hover:saturate-[130%] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-                  >
-                  @if (addingToCart) {
-                  <span>Adding to cart...</span>
-                  }
-                  @else {
+                  hover:saturate-[130%] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
                   <span>Add to cart</span>
-                  }
                 </button>
               }
             </div>

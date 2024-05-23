@@ -1,5 +1,5 @@
 export interface dtoProductData {
-  productId: number;
+  productId: string;
   name: string;
   price: number;
   category: string;
@@ -20,6 +20,7 @@ export interface dtoProductEntity extends dtoProductListItem {
 
 export interface dtoProductCartData extends dtoProductData {
   addedDate: Date;
+  quantity: number;
 }
 
 export interface dtoProduct {

@@ -4,12 +4,15 @@ import { AuthService } from './auth.service';
 import { dtoActionResponse, dtoListResponse } from '../../interfaces/response.interface';
 import { dtoProductCartData } from '../../interfaces/product.interface';
 import { dtoPaginationFilter } from '../../interfaces/filters.interface';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
   private env = "http://localhost:5277";
+
+  public cartCount$ = new BehaviorSubject<number | undefined>(undefined);
 
   constructor(private http: HttpClient, private auth: AuthService) { }
 
@@ -25,8 +28,8 @@ export class CartService {
       });
   }
 
-  public addToCart(productId: number) {
-    return this.http.post<dtoActionResponse<boolean>>(this.env + `/product/${productId}/cart`, null,
+  public getCartItemsCount() {
+    return this.http.get<dtoActionResponse<number>>(this.env + "/products/cart/indicator",
       {
         headers: {
           Authorization: "Bearer " + this.auth.user$.value?.token
@@ -34,7 +37,19 @@ export class CartService {
       });
   }
 
-  public removeFromCart(productId: number) {
+  public addToCart(productId: string, quantity: number) {
+    return this.http.post<dtoActionResponse<boolean>>(this.env + `/product/${productId}/cart`, null,
+      {
+        headers: {
+          Authorization: "Bearer " + this.auth.user$.value?.token
+        },
+        params: {
+          quantity: quantity
+        }
+      });
+  }
+
+  public removeFromCart(productId: string) {
     return this.http.delete<dtoActionResponse<boolean>>(this.env + `/product/${productId}/cart`,
       {
         headers: {

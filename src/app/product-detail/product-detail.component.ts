@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { ProductsService } from '../services/products.service';
 import { dtoProductEntity } from '../../interfaces/product.interface';
-import { CurrencyPipe, DecimalPipe, I18nPluralPipe } from '@angular/common';
+import { AsyncPipe, CurrencyPipe, DecimalPipe, I18nPluralPipe } from '@angular/common';
 import { slightFadeIn } from '../animations';
 import { HttpErrorResponse } from '@angular/common/http';
 import { dtoActionResponse } from '../../interfaces/response.interface';
@@ -13,6 +13,8 @@ import { ProductDetailReviewsComponent } from '../product-detail-reviews/product
 import { AuthService } from '../services/auth.service';
 import { CartService } from '../services/cart.service';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { ThemeService } from '../services/theme.service';
+import { OrdersService } from '../services/orders.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -22,7 +24,8 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
     DecimalPipe,
     I18nPluralPipe,
     NgxSkeletonLoaderModule,
-    ProductDetailReviewsComponent
+    ProductDetailReviewsComponent,
+    AsyncPipe
   ],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.css',
@@ -35,14 +38,13 @@ export class ProductDetailComponent implements OnInit {
   isLoading = true;
   item: dtoProductEntity = {} as any;
 
-  addingToCart = false;
   quantity = 1;
   showFullDescription = true;
   isDescriptionSmall = true;
 
   constructor(private route: ActivatedRoute, private router: Router, private responsive: BreakpointObserver,
-    private authService: AuthService, private cartService: CartService,
-    private productService: ProductsService, private toast: ToastService) { }
+    private authService: AuthService, private cartService: CartService, private ordersService: OrdersService,
+    private productService: ProductsService, private toast: ToastService, public themeService: ThemeService) { }
 
   ngOnInit(): void {
     const routeParams = this.route.snapshot.paramMap;
@@ -95,7 +97,7 @@ export class ProductDetailComponent implements OnInit {
 
   private handleCartError(error: HttpErrorResponse) {
     try {
-      this.addingToCart = false;
+      this.item.inCart = !this.item.inCart;
       const response = error.error as dtoActionResponse<boolean>;
 
       if (response && response.message)
@@ -151,15 +153,33 @@ export class ProductDetailComponent implements OnInit {
       return;
     }
 
-    this.addingToCart = true;
-    this.cartService.addToCart(this.item.productId).pipe(catchError(this.handleCartError.bind(this))).subscribe(response => {
-      this.addingToCart = false;
+    this.item.inCart = true;
+    this.cartService.addToCart(this.item.productId, this.quantity).pipe(catchError(this.handleCartError.bind(this))).subscribe(response => {
       this.item.inCart = response.data;
 
       if (response.data) {
         this.toast.successToast(`<b>${this.item.name.length >= 35 ? this.item.name.substring(0, 32) + "..." : this.item.name}</b> was added to Shopping Cart!`);
+        this.cartService.cartCount$.next((this.cartService.cartCount$.value ?? 0) + 1);
       }
     });
+  }
+
+  public buyProductNow(): void {
+    this.ordersService.createOrder([{
+      productId: this.item.productId,
+      quantity: this.quantity
+    }])
+      .pipe(catchError(this.handleCartError.bind(this)))
+      .subscribe(response => {
+        if (response.data) {
+          this.toast.successToast(`You've bought <b>${this.quantity} x ${this.item.name.length >= 35 ? this.item.name.substring(0, 32) + "..." : this.item.name}</b>!`);
+          if (this.item.inCart) {
+            let cartCount = this.cartService.cartCount$.value ?? 0;
+            this.cartService.cartCount$.next(cartCount > 0 ? cartCount - 1 : 0);
+            this.item.inCart = false;
+          }
+        }
+      });
   }
 
   public removeFromCart(): void {
@@ -168,13 +188,14 @@ export class ProductDetailComponent implements OnInit {
       return;
     }
 
-    this.addingToCart = true;
+    this.item.inCart = false;
     this.cartService.removeFromCart(this.item.productId).pipe(catchError(this.handleCartError.bind(this))).subscribe(response => {
-      this.addingToCart = false;
       this.item.inCart = !response.data;
 
       if (response.data) {
         this.toast.successToast(`<b>${this.item.name.length >= 35 ? this.item.name.substring(0, 32) + "..." : this.item.name}</b> was removed from Shopping Cart`);
+        let cartCount = this.cartService.cartCount$.value ?? 0;
+        this.cartService.cartCount$.next(cartCount > 0 ? cartCount - 1 : 0);
       }
     });
   }

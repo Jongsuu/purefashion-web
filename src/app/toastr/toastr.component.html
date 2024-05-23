@@ -1,4 +1,4 @@
-<a class="toast-class" [class]="toastService.toastState$ | async" (click)="dismiss()"
+<a class="toast-class s-md:w-[356px] w-[95%]" [class]="toastService.toastState$ | async" (click)="dismiss()"
   [@toastTrigger]="(toastService.showsToast$ | async) ? 'open' : 'close'">
   <div>
     @if ((toastService.toastState$ | async) === TOAST_STATE.success) {

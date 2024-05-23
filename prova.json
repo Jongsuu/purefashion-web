@@ -1,0 +1,13 @@
+db.orders.aggregate([
+  { $match: { userId: ObjectId("661a9b24c65b79ccd6ef634b")
+    }
+  },
+  { $sort: { orderDate: -1
+    }
+  },
+  { $skip: 0
+  },
+  { $limit: 2
+  }
+]
+);

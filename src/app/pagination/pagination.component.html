@@ -15,7 +15,8 @@
     @if (!isMobile) {
       @for (page of pages; track page) {
         @if (page === -1) {
-        <span class="bg-white px-5 py-3 border-e-2 cursor-default select-none">...</span>
+        <span class="dark:border-neutral-400 dark:text-zinc-200 bg-white dark:bg-neutral-600
+          px-5 py-3 border-s-2 cursor-default select-none">...</span>
         }
         @else {
         <button type="button" (click)="onGoTo(page)"

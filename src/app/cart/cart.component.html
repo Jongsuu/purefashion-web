@@ -1,8 +1,9 @@
-<section class="pt-[100px] pb-[50px] px-2 s:px-4 lg:px-6 xl:px-10 2xl:px-12">
+<section id="cart" class="pt-[100px] pb-[50px] px-2 s:px-4 lg:px-6 xl:px-10 2xl:px-12" #cartSection>
   <div class="s-md:p-5 xl:p-12 s-md:bg-white dark:s-md:bg-neutral-700 s-md:rounded-md s-md:shadow-xl">
     @if (isLoading) {
-      <div class="h-[48px] w-[300px]">
-        <ngx-skeleton-loader [theme]="{ 'height': '100%' }"/>
+      <div class="h-[48px] md:w-[300px] s:w-2/3 w-full">
+        <ngx-skeleton-loader [theme]="{ 'height': '100%' }"
+          [animation]="(themeService.isDarkTheme$ | async) ? 'progress-dark' : 'progress'"/>
       </div>
       <ul class="flex flex-col gap-4 my-5">
         @for(product of nProducts; track product) {
@@ -11,32 +12,44 @@
                   grid xl:grid-cols-5 s-md:grid-cols-6 s-md:p-4
                   bg-slate-50 dark:bg-neutral-600">
               <div class="xl:col-span-1 s-md:col-span-2">
-                <div class="w-auto h-[150px] s-md:h-[175px] lg:h-[200px]">
-                  <ngx-skeleton-loader [theme]="{ 'height': '100%', 'width': '100%' }"/>
+                <div class="w-auto h-[150px] s-md:h-[175px] lg:h-[200px] s-md:rounded-xl rounded-t-xl overflow-hidden">
+                  <ngx-skeleton-loader [theme]="{ 'height': '100%', 'width': '100%', 'border-radius': '0px' }"
+                    [animation]="(themeService.isDarkTheme$ | async) ? 'progress-dark' : 'progress'"/>
                 </div>
               </div>
               <div class="p-2 lg:col-span-4 s-md:col-span-4">
                 <div>
                   <div class="h-[24px] md:w-1/2 s-md:w-2/3 w-full">
-                    <ngx-skeleton-loader [theme]="{ 'height': '100%' }"/>
+                    <ngx-skeleton-loader [theme]="{ 'height': '100%' }"
+                    [animation]="(themeService.isDarkTheme$ | async) ? 'progress-dark' : 'progress'"/>
                   </div>
                 </div>
-                <div class="mt-[6px]">
-                  <div class="h-[24px] w-[150px]">
-                    <ngx-skeleton-loader [theme]="{ 'height': '100%' }"/>
+                <div class="flex gap-x-2 mb-1 mt-[6px] flex-wrap">
+                  <div>
+                    <div class="h-[24px] w-[100px]">
+                      <ngx-skeleton-loader [theme]="{ 'height': '100%' }"
+                        [animation]="(themeService.isDarkTheme$ | async) ? 'progress-dark' : 'progress'"/>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="h-[24px] s-md:w-[200px] w-[150px]">
+                      <ngx-skeleton-loader [theme]="{ 'height': '100%' }"
+                        [animation]="(themeService.isDarkTheme$ | async) ? 'progress-dark' : 'progress'"/>
+                    </div>
                   </div>
                 </div>
-                <div class="mt-[6px]">
-                  <div class="h-[24px] s-md:w-[250px] w-[200px]">
-                    <ngx-skeleton-loader [theme]="{ 'height': '100%' }"/>
-                  </div>
+                <div class="h-9 mt-1 w-[150px]">
+                  <ngx-skeleton-loader [theme]="{ 'height': '100%', 'width': '100%' }"
+                    [animation]="(themeService.isDarkTheme$ | async) ? 'progress-dark' : 'progress'"/>
                 </div>
                 <div class="mt-[6px] flex gap-x-3">
-                  <div class="h-[24px] w-[48px]">
-                    <ngx-skeleton-loader [theme]="{ 'height': '100%' }"/>
-                  </div>
                   <div class="h-[24px] w-[62px]">
-                    <ngx-skeleton-loader [theme]="{ 'height': '100%' }"/>
+                    <ngx-skeleton-loader [theme]="{ 'height': '100%' }"
+                    [animation]="(themeService.isDarkTheme$ | async) ? 'progress-dark' : 'progress'"/>
+                  </div>
+                  <div class="h-[24px] w-[48px]">
+                    <ngx-skeleton-loader [theme]="{ 'height': '100%' }"
+                    [animation]="(themeService.isDarkTheme$ | async) ? 'progress-dark' : 'progress'"/>
                   </div>
                 </div>
               </div>
@@ -45,7 +58,8 @@
         }
       </ul>
       <div class="h-[48px] w-[300px]">
-        <ngx-skeleton-loader [theme]="{ 'height': '100%' }"/>
+        <ngx-skeleton-loader [theme]="{ 'height': '100%' }"
+          [animation]="(themeService.isDarkTheme$ | async) ? 'progress-dark' : 'progress'"/>
       </div>
     }
     @else {
@@ -56,10 +70,10 @@
             @for(product of products; track product.productId) {
               <li @slightFadeIn>
                 <div
-                  class="flex-grow transition-colors duration-200 ease-in-out rounded-xl shadow-xl
+                  class="flex-grow transition-colors duration-200 ease-in-out s-md:rounded-xl rounded-md shadow-xl
                   grid xl:grid-cols-5 s-md:grid-cols-6 s-md:p-4
                   bg-slate-50 dark:bg-neutral-600">
-                  <div class="flex justify-center items-center s-md:rounded-xl rounded-t-xl s-md:shadow-md
+                  <div class="flex justify-center items-center s-md:rounded-xl rounded-t-md s-md:shadow-md
                     xl:col-span-1 s-md:col-span-2
                     bg-slate-100 dark:bg-neutral-300">
                     <img
@@ -75,23 +89,50 @@
                         <h5 title="{{ product.name }}" class="line-clamp-2">{{ product.name }}</h5>
                       </a>
                     </div>
-                    <p class="m-0 dark:text-zinc-100">{{ product.price | currency : "EUR" : 'symbol' : '0.2-2' }}</p>
-                    <div class="flex gap-x-1 dark:text-zinc-100">
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                      </svg>
-                      <p class="m-0">{{ product.addedDate | date }}</p>
+                    <div class="flex gap-x-2 flex-wrap items-center mb-1">
+                      <p class="m-0 dark:text-zinc-100 text-[18px]">{{ product.price | currency : "EUR" : 'symbol' : '0.2-2' }}</p>
+                      <div class="flex gap-x-1 dark:text-zinc-100">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                          <path fill-rule="evenodd" d="M6.75 2.25A.75.75 0 0 1 7.5 3v1.5h9V3A.75.75 0 0 1 18 3v1.5h.75a3 3 0 0 1 3 3v11.25a3 3 0 0 1-3 3H5.25a3 3 0 0 1-3-3V7.5a3 3 0 0 1 3-3H6V3a.75.75 0 0 1 .75-.75Zm13.5 9a1.5 1.5 0 0 0-1.5-1.5H5.25a1.5 1.5 0 0 0-1.5 1.5v7.5a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5v-7.5Z" clip-rule="evenodd" />
+                        </svg>
+                        <p class="m-0">{{ product.addedDate | date }}</p>
+                      </div>
+                    </div>
+                    <div class="inline-flex gap-x-2 items-stretch h-10 mb-1">
+                      <button type="button" (click)="decrementQuantity(quantityInput, product.productId)" [disabled]="product.quantity <= 1"
+                        class="w-10 text-sm bg-white text-gray-700 border border-gray-300 flex items-center justify-center
+                        hover:border-gray-400 disabled:text-gray-400 disabled:border-gray-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                          <path fill-rule="evenodd" d="M4.25 12a.75.75 0 0 1 .75-.75h14a.75.75 0 0 1 0 1.5H5a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd" />
+                        </svg>
+                      </button>
+                      <input
+                      #quantityInput
+                      type="number"
+                      class="w-10 bg-white text-gray-900 text-center border border-gray-300 hover:border-gray-400"
+                      (change)="onChangeQuantity(quantityInput, product.productId)"
+                      value="{{ product.quantity }}"
+                      min="1"
+                      max="30"/>
+                      <button type="button" (click)="incrementQuantity(quantityInput, product.productId)" [disabled]="product.quantity >= 30"
+                        class="w-10 text-sm bg-white text-gray-700 border border-gray-300 flex items-center justify-center
+                        hover:border-gray-400 disabled:text-gray-400 disabled:border-gray-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                        </svg>
+                      </button>
                     </div>
                     <div class="flex gap-x-3">
+                      <button
+                        (click)="buyProductNow(product)"
+                        class="bg-transparent outline-none transition-colors duration-300 ease-in-out
+                        text-secondary dark:text-dark-secondary font-semibold
+                        hover:text-accent dark:hover:text-dark-accent">Buy now</button>
                       <button
                         (click)="removeFromCart(product)"
                         class="bg-transparent outline-none transition-colors duration-500 ease-in-out
                         text-primary dark:text-dark-primary font-semibold
                         hover:text-accent dark:hover:text-dark-accent">Delete</button>
-                      <button
-                        class="bg-transparent outline-none transition-colors duration-300 ease-in-out
-                        text-secondary dark:text-dark-secondary font-semibold
-                        hover:text-accent dark:hover:text-dark-accent">Buy now</button>
                     </div>
                   </div>
                 </div>
@@ -107,7 +148,13 @@
             />
         }
         @else {
-          <h1 class="text-2xl dark:text-zinc-100" @slightFadeIn>Your PureFashion cart is empty.</h1>
+          <div @slightFadeIn>
+              <h1 class="text-2xl dark:text-zinc-100">Your PureFashion cart is empty.</h1>
+              <a [routerLink]="'/'"
+                class="text-primary dark:text-dark-primary font-bold dark:hover:brightness-[110%] hover:brightness-[120%] transition-[filter] duration-300 ease-in-out">
+                Browse to find products!
+              </a>
+          </div>
         }
       </div>
     }

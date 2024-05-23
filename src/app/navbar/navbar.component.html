@@ -3,13 +3,19 @@
     <div class="col-span-1 grid place-content-center h-[40px] select-none">
       <a
         [routerLink]="'/'"
+        (click)="showUserMenu = false"
         class="hover:scale-[103%] transition-transform duration-300 ease-in-out relative h-[70px] w-[70px] s:h-[80px] s:w-[80px]">
         <img src="assets/logo.jpg" class="absolute rounded-[50%] h-[70px] s:h-[80px] w-auto inset-0"/>
       </a>
     </div>
     <ul class="hidden list-none col-span-6 lg:flex lg:justify-center lg:gap-x-12 lg:items-center">
       @for (link of links; track link.name) {
-        <li><a [routerLink]="link.href" class="text-primary dark:text-dark-primary nav-link">{{ link.name }}</a></li>
+        <li>
+          <a
+            (click)="showUserMenu = false"
+            [routerLink]="link.href"
+            class="text-primary dark:text-dark-primary nav-link">{{ link.name }}</a>
+        </li>
       }
     </ul>
     <div class="col-span-2 flex items-center justify-end gap-x-4">
@@ -34,12 +40,27 @@
           <ul
             [@fadeInMenu]="showUserMenu ? 'open' : 'close'"
             [class.pointer-events-none]="!showUserMenu" style="opacity: 0;"
-            class="absolute bg-slate-100 dark:bg-neutral-500 shadow-md -bottom-[155px] -right-[15%] w-[150px] rounded flex flex-col pt-2">
+            class="absolute bg-slate-100 dark:bg-neutral-500 shadow-md -bottom-[155px] s-md:-right-[15%] -right-[50%] w-[150px] rounded flex flex-col pt-2">
             <li class="menu-item-container hover:bg-slate-200 dark:hover:bg-neutral-400">
-              <button class="menu-item text-gray-700 dark:text-zinc-50">Orders</button>
+              <a
+                [routerLink]="'/orders'"
+                (click)="showUserMenu = false"
+                class="menu-item flex items-center gap-x-2 text-gray-700 dark:text-zinc-50">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+                  <path fill-rule="evenodd" d="M1.5 6.375c0-1.036.84-1.875 1.875-1.875h17.25c1.035 0 1.875.84 1.875 1.875v3.026a.75.75 0 0 1-.375.65 2.249 2.249 0 0 0 0 3.898.75.75 0 0 1 .375.65v3.026c0 1.035-.84 1.875-1.875 1.875H3.375A1.875 1.875 0 0 1 1.5 17.625v-3.026a.75.75 0 0 1 .374-.65 2.249 2.249 0 0 0 0-3.898.75.75 0 0 1-.374-.65V6.375Zm15-1.125a.75.75 0 0 1 .75.75v.75a.75.75 0 0 1-1.5 0V6a.75.75 0 0 1 .75-.75Zm.75 4.5a.75.75 0 0 0-1.5 0v.75a.75.75 0 0 0 1.5 0v-.75Zm-.75 3a.75.75 0 0 1 .75.75v.75a.75.75 0 0 1-1.5 0v-.75a.75.75 0 0 1 .75-.75Zm.75 4.5a.75.75 0 0 0-1.5 0V18a.75.75 0 0 0 1.5 0v-.75ZM6 12a.75.75 0 0 1 .75-.75H12a.75.75 0 0 1 0 1.5H6.75A.75.75 0 0 1 6 12Zm.75 2.25a.75.75 0 0 0 0 1.5h3a.75.75 0 0 0 0-1.5h-3Z" clip-rule="evenodd" />
+                </svg>
+                <span>Orders</span>
+              </a>
             </li>
             <li class="menu-item-container hover:bg-slate-200 dark:hover:bg-neutral-400">
-              <button class="menu-item text-gray-700 dark:text-zinc-50">Configuration</button>
+              <button
+                (click)="showUserMenu = false"
+                class="menu-item flex items-center gap-x-2 text-gray-700 dark:text-zinc-50">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
+                  <path fill-rule="evenodd" d="M11.078 2.25c-.917 0-1.699.663-1.85 1.567L9.05 4.889c-.02.12-.115.26-.297.348a7.493 7.493 0 0 0-.986.57c-.166.115-.334.126-.45.083L6.3 5.508a1.875 1.875 0 0 0-2.282.819l-.922 1.597a1.875 1.875 0 0 0 .432 2.385l.84.692c.095.078.17.229.154.43a7.598 7.598 0 0 0 0 1.139c.015.2-.059.352-.153.43l-.841.692a1.875 1.875 0 0 0-.432 2.385l.922 1.597a1.875 1.875 0 0 0 2.282.818l1.019-.382c.115-.043.283-.031.45.082.312.214.641.405.985.57.182.088.277.228.297.35l.178 1.071c.151.904.933 1.567 1.85 1.567h1.844c.916 0 1.699-.663 1.85-1.567l.178-1.072c.02-.12.114-.26.297-.349.344-.165.673-.356.985-.57.167-.114.335-.125.45-.082l1.02.382a1.875 1.875 0 0 0 2.28-.819l.923-1.597a1.875 1.875 0 0 0-.432-2.385l-.84-.692c-.095-.078-.17-.229-.154-.43a7.614 7.614 0 0 0 0-1.139c-.016-.2.059-.352.153-.43l.84-.692c.708-.582.891-1.59.433-2.385l-.922-1.597a1.875 1.875 0 0 0-2.282-.818l-1.02.382c-.114.043-.282.031-.449-.083a7.49 7.49 0 0 0-.985-.57c-.183-.087-.277-.227-.297-.348l-.179-1.072a1.875 1.875 0 0 0-1.85-1.567h-1.843ZM12 15.75a3.75 3.75 0 1 0 0-7.5 3.75 3.75 0 0 0 0 7.5Z" clip-rule="evenodd" />
+                </svg>
+                <span>Configuration</span>
+              </button>
             </li>
             <li class="border-t-gray-300 border-t p-2">
               <button (click)="logout()"
@@ -51,9 +72,13 @@
         </div>
         <a
           [routerLink]="'/cart'"
-          class="text-sm text-gray-600 dark:text-zinc-200 flex justify-end
+          (click)="showUserMenu = false"
+          class="text-sm text-gray-600 dark:text-zinc-200 flex justify-end relative
           transition-colors duration-300 hover:text-gray-800 dark:hover:text-zinc-400">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+          @if (cartService.cartCount$ | async) {
+            <span class="text-[12px] bg-red-500/20 dark:bg-red-500/40 text-red-500 dark:text-red-200 absolute -right-[12px] -top-[9px] px-2 py-[2px] rounded-[50%] font-semibold">{{ cartService.cartCount$ | async }}</span>
+          }
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 z-[1]">
             <path d="M2.25 2.25a.75.75 0 0 0 0 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 0 0-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 0 0 0-1.5H5.378A2.25 2.25 0 0 1 7.5 15h11.218a.75.75 0 0 0 .674-.421 60.358 60.358 0 0 0 2.96-7.228.75.75 0 0 0-.525-.965A60.864 60.864 0 0 0 5.68 4.509l-.232-.867A1.875 1.875 0 0 0 3.636 2.25H2.25ZM3.75 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0ZM16.5 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Z" />
           </svg>
         </a>
